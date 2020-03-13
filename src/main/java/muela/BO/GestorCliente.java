@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import muela.DAO.DaoCliente;
-import muela.VO.Cliente;
+import muela.entities.Cliente;
 
 @Service
 public class GestorCliente {

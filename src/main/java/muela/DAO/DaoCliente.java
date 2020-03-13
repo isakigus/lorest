@@ -11,40 +11,14 @@ import java.util.TimeZone;
 
 import org.springframework.stereotype.Repository;
 
-import muela.VO.Cliente;
+import muela.entities.Cliente;
+import genericos.DaoMysql;
 
 @Repository
-public class DaoCliente {
+public class DaoCliente extends DaoMysql {
 
 	public DaoCliente() {
 		super();
-	}
-
-	private Connection conexion;
-
-	public boolean abrirConexion() {
-		String url = "jdbc:mysql://localhost:3306/muela?serverTimezone=" + TimeZone.getDefault().getID();
-		String usuario = "muela";
-		String password = "Muela2000";
-		try {
-			conexion = DriverManager.getConnection(url, usuario, password);
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	public boolean cerrarConexion() {
-		try {
-			conexion.close();
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
 	}
 
 	public boolean crearCliente(Cliente cliente) {
@@ -60,11 +34,8 @@ public class DaoCliente {
 			ps.setBlob(3, cliente.getCodigoBarras());
 			ps.setInt(4, cliente.getIdEmpresa());
 			int numeroFilas = ps.executeUpdate();
-			if (numeroFilas == 0) {
-				return false;
-			} else {
-				return true;
-			}
+			return numeroFilas == 0;
+
 		} catch (SQLException e) {
 			System.out.println("Error al crear cliente");
 			e.printStackTrace();
@@ -90,11 +61,7 @@ public class DaoCliente {
 			ps.setInt(5, cliente.getIdCliente());
 
 			int numeroFilas = ps.executeUpdate();
-			if (numeroFilas == 0) {
-				return false;
-			} else {
-				return true;
-			}
+			return numeroFilas == 0;
 		} catch (SQLException e) {
 			System.out.println("Error al modificar cliente");
 			e.printStackTrace();
@@ -118,11 +85,7 @@ public class DaoCliente {
 			ps.setInt(1, cliente.getIdCliente());
 
 			int numeroFilas = ps.executeUpdate();
-			if (numeroFilas == 0) {
-				return false;
-			} else {
-				return true;
-			}
+			return numeroFilas == 0;
 		} catch (SQLException e) {
 			System.out.println("Error al borrar cliente");
 			e.printStackTrace();
@@ -201,12 +164,5 @@ public class DaoCliente {
 
 	}
 
-	public Connection getConexion() {
-		return conexion;
-	}
-
-	public void setConexion(Connection conexion) {
-		this.conexion = conexion;
-	}
 
 }

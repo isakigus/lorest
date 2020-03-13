@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import muela.BO.GestorCliente;
-import muela.VO.Cliente;
+import muela.entities.Cliente;
 
 @RestController
 public class ControladorCliente {
