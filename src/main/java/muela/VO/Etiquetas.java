@@ -1,6 +1,6 @@
-package VO;
+package muela.VO;
 
-public class Etiquetas {
+public class Etiqueta {
 	private int idEtiqueta;
 	private int filas;
 	private int columnas;
@@ -40,7 +40,7 @@ public class Etiquetas {
 
 	@Override
 	public String toString() {
-		return "etiquetas [idEtiqueta=" + idEtiqueta + ", filas=" + filas + ", columnas=" + columnas + ", idFormato="
+		return "etiqueta [idEtiqueta=" + idEtiqueta + ", filas=" + filas + ", columnas=" + columnas + ", idFormato="
 				+ idFormato + "]";
 	}
 

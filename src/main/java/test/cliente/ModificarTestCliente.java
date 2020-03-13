@@ -1,8 +1,8 @@
 package test.cliente;
 
-import BO.GestorCliente;
-import DAO.DaoCliente;
-import VO.Cliente;
+import muela.BO.GestorCliente;
+import muela.DAO.DaoCliente;
+import muela.VO.Cliente;
 
 public class ModificarTestCliente {
 
@@ -11,22 +11,22 @@ public class ModificarTestCliente {
 		DaoCliente dao = new DaoCliente();
 
 		Cliente prueba = new Cliente();
-		
+
 		prueba.setIdCliente(2);
 		prueba.setEanColumn1("modDao");
 		prueba.setCodigoCliente("modifDao");
 		prueba.setIdEmpresa(5);
-		
+
 		boolean modificar = dao.modificarCliente(prueba);
 
 		System.out.println(modificar);
-		
-		
+
+
 
 		GestorCliente gestor = new GestorCliente();
 
 		Cliente prueba2 = new Cliente();
-		
+
 		prueba2.setIdCliente(6);
 		prueba2.setEanColumn1("modGest");
 		prueba2.setCodigoCliente("modifGest");

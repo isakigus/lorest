@@ -1,16 +1,16 @@
-package test.etiquetasEnvio;
+package test.etiquetaEnvio;
 
-import BO.GestorEtiquetasEnvio;
-import DAO.DaoEtiquetasEnvio;
-import VO.EtiquetasEnvio;
+import muela.BO.GestorEtiquetaEnvio;
+import muela.DAO.DaoEtiquetaEnvio;
+import muela.VO.EtiquetaEnvio;
 
 public class ModificarTestEtiquetaEnvio {
 
 	public static void main(String[] args) {
 
-		DaoEtiquetasEnvio dao = new DaoEtiquetasEnvio();
+		DaoEtiquetaEnvio dao = new DaoEtiquetaEnvio();
 
-		EtiquetasEnvio prueba = new EtiquetasEnvio();
+		EtiquetaEnvio prueba = new EtiquetaEnvio();
 
 		prueba.setIdEtiquetaEnvio(4);
 		prueba.setIdEmpresaMensajes(5);
@@ -26,9 +26,9 @@ public class ModificarTestEtiquetaEnvio {
 
 		System.out.println(modificar);
 
-		GestorEtiquetasEnvio gestor = new GestorEtiquetasEnvio();
+		GestorEtiquetaEnvio gestor = new GestorEtiquetaEnvio();
 
-		EtiquetasEnvio prueba2 = new EtiquetasEnvio();
+		EtiquetaEnvio prueba2 = new EtiquetaEnvio();
 
 		prueba2.setIdEtiquetaEnvio(5);
 		prueba2.setIdEmpresaMensajes(5);

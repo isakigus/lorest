@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import BO.GestorEmpresa;
-import VO.Empresa;
+import muela.BO.GestorEmpresa;
+import muela.VO.Empresa;
 
 @RestController
 public class ControladorEmpresa {

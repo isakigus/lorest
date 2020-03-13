@@ -1,11 +1,11 @@
 package test.formatoEtiqueta;
 
-import BO.GestorFormatoEtiquetas;
-import DAO.DaoFormatoEtiqueta;
-import VO.FormatoEtiqueta;
+import muela.BO.GestorFormatoEtiqueta;
+import muela.DAO.DaoFormatoEtiqueta;
+import muela.VO.FormatoEtiqueta;
 
 public class BorrarTestFormatoEtiqueta {
-	
+
 	public static void main(String[] args) {
 
 		DaoFormatoEtiqueta dao = new DaoFormatoEtiqueta();
@@ -17,9 +17,9 @@ public class BorrarTestFormatoEtiqueta {
 		boolean borrado = dao.borrarFormatoEtiqueta(objetoBorrar);
 
 		System.out.println(borrado);
-		
 
-		GestorFormatoEtiquetas gestor = new GestorFormatoEtiquetas();
+
+		GestorFormatoEtiqueta gestor = new GestorFormatoEtiqueta();
 
 		FormatoEtiqueta entidad = new FormatoEtiqueta();
 

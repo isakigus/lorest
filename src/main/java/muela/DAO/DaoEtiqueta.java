@@ -1,4 +1,4 @@
-package DAO;
+package muela.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.TimeZone;
 import org.springframework.stereotype.Repository;
 
-import VO.Etiquetas;
+import muela.VO.Etiqueta;
 
 @Repository
-public class DaoEtiquetas {
+public class DaoEtiqueta {
 
 
 
-	public DaoEtiquetas() {
+	public DaoEtiqueta() {
 		super();
 	}
 
@@ -48,11 +48,11 @@ public class DaoEtiquetas {
 		}
 	}
 
-	public boolean crearEtiqueta(Etiquetas etiqueta) {
+	public boolean crearEtiqueta(Etiqueta etiqueta) {
 		if (!abrirConexion()) {
 			return false;
 		}
-		String query = "insert into etiquetas (filas, columnas, idFormato) values(?,?,?)";
+		String query = "insert into etiqueta (filas, columnas, idFormato) values(?,?,?)";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
@@ -75,11 +75,11 @@ public class DaoEtiquetas {
 		}
 	}
 
-	public boolean modificarEtiqueta(Etiquetas etiqueta) {
+	public boolean modificarEtiqueta(Etiqueta etiqueta) {
 		if (!abrirConexion()) {
 			return false;
 		}
-		String query = "update etiquetas set filas=?, columnas=?, idFormato=? where idEtiqueta=?";
+		String query = "update etiqueta set filas=?, columnas=?, idFormato=? where idEtiqueta=?";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
@@ -104,7 +104,7 @@ public class DaoEtiquetas {
 		}
 	}
 
-	public boolean borrarEtiqueta(Etiquetas etiqueta) {
+	public boolean borrarEtiqueta(Etiqueta etiqueta) {
 		if (!abrirConexion()) {
 			return false;
 		}
@@ -130,12 +130,12 @@ public class DaoEtiquetas {
 		}
 	}
 
-	public Etiquetas obtenerEtiqueta(int idEtiqueta) {
+	public Etiqueta obtenerEtiqueta(int idEtiqueta) {
 		if (!abrirConexion()) {
 			return null;
 		}
 
-		String query = "select idEtiqueta,filas,columnas,idFormato from etiquetas where idEtiqueta=?";
+		String query = "select idEtiqueta,filas,columnas,idFormato from etiqueta where idEtiqueta=?";
 
 		try {
 
@@ -143,10 +143,10 @@ public class DaoEtiquetas {
 			ps.setInt(1, idEtiqueta);
 
 			ResultSet rs = ps.executeQuery();
-			Etiquetas etiqueta = null;
+			Etiqueta etiqueta = null;
 
 			while (rs.next()) {
-				etiqueta = new Etiquetas();
+				etiqueta = new Etiqueta();
 				etiqueta.setIdEtiqueta(rs.getInt(1));
 				etiqueta.setFilas(rs.getInt(2));
 				etiqueta.setColumnas(rs.getInt(3));
@@ -163,31 +163,31 @@ public class DaoEtiquetas {
 
 	}
 
-	public List<Etiquetas> listarTodasEtiquetas() {
+	public List<Etiqueta> listarTodasEtiqueta() {
 		if (!abrirConexion()) {
 			return null;
 		}
 
-		String query = "select idEtiqueta,filas,columnas,idFormato from etiquetas";
+		String query = "select idEtiqueta,filas,columnas,idFormato from etiqueta";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
-			Etiquetas etiqueta = null;
-			List<Etiquetas> listadoEtiquetas = new ArrayList<Etiquetas>();
+			Etiqueta etiqueta = null;
+			List<Etiqueta> listadoEtiqueta = new ArrayList<Etiqueta>();
 			while (rs.next()) {
 
-				etiqueta = new Etiquetas();
+				etiqueta = new Etiqueta();
 				etiqueta.setIdEtiqueta(rs.getInt(1));
 				etiqueta.setFilas(rs.getInt(2));
 				etiqueta.setColumnas(rs.getInt(3));
 				etiqueta.setIdFormato(rs.getInt(4));
 
-				listadoEtiquetas.add(etiqueta);
+				listadoEtiqueta.add(etiqueta);
 			}
-			return listadoEtiquetas;
+			return listadoEtiqueta;
 		} catch (SQLException e) {
-			System.out.println("Error al mostrar listado de etiquetas");
+			System.out.println("Error al mostrar listado de etiqueta");
 			e.printStackTrace();
 			return null;
 		} finally {

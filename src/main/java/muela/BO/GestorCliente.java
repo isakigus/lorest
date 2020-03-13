@@ -1,26 +1,26 @@
-package BO;
+package muela.BO;
 
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-//import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import DAO.DaoCliente;
-import VO.Cliente;
+import muela.DAO.DaoCliente;
+import muela.VO.Cliente;
 
 @Service
 public class GestorCliente {
 
-	
 	DaoCliente daoCliente = new DaoCliente();
-	
 
+	// @Autowired
 	public GestorCliente() {
 		super();
-		
+
 	}
+
 	@Transactional
 	public boolean crearCliente(Cliente cliente) {
 
@@ -35,13 +35,11 @@ public class GestorCliente {
 
 	@Transactional
 	public boolean borrarCliente(Cliente cliente) {
-		
-		
+
 		return daoCliente.borrarCliente(cliente);
 	}
 
 	public Cliente obtenerCliente(int idCliente) {
-		
 
 		return daoCliente.obtenerCliente(idCliente);
 	}

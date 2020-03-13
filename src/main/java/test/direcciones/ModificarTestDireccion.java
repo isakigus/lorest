@@ -1,15 +1,15 @@
-package test.direcciones;
+package test.direccion;
 
-import BO.GestorDirecciones;
-import DAO.DaoDirecciones;
-import VO.Direcciones;
+import muela.BO.GestorDireccion;
+import muela.DAO.DaoDireccion;
+import muela.VO.Direccion;
 
 public class ModificarTestDireccion {
 	public static void main(String[] args) {
 
-		DaoDirecciones dao = new DaoDirecciones();
+		DaoDireccion dao = new DaoDireccion();
 
-		Direcciones prueba = new Direcciones();
+		Direccion prueba = new Direccion();
 
 		prueba.setIdDireccion(12);
 		prueba.setDireccion("modificado Dao");
@@ -19,11 +19,11 @@ public class ModificarTestDireccion {
 		boolean modificar = dao.modificarDireccion(prueba);
 
 		System.out.println(modificar);
-		
 
-		GestorDirecciones gestor = new GestorDirecciones();
 
-		Direcciones prueba2 = new Direcciones();
+		GestorDireccion gestor = new GestorDireccion();
+
+		Direccion prueba2 = new Direccion();
 
 		prueba2.setIdDireccion(13);
 		prueba2.setDireccion("modificado Gestor");

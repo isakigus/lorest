@@ -1,16 +1,16 @@
-package test.etiquetas;
+package test.etiqueta;
 
-import BO.GestorEtiquetas;
-import DAO.DaoEtiquetas;
-import VO.Etiquetas;
+import muela.BO.GestorEtiqueta;
+import muela.DAO.DaoEtiqueta;
+import muela.VO.Etiqueta;
 
-public class AltaTestEtiquetas {
+public class AltaTestEtiqueta {
 
 	public static void main(String[] args) {
 
-		DaoEtiquetas dao = new DaoEtiquetas();
+		DaoEtiqueta dao = new DaoEtiqueta();
 
-		Etiquetas entidad = new Etiquetas();
+		Etiqueta entidad = new Etiqueta();
 
 		entidad.setFilas(3);
 		entidad.setColumnas(5);
@@ -20,8 +20,8 @@ public class AltaTestEtiquetas {
 
 		System.out.println(testAlta);
 
-		GestorEtiquetas gestor = new GestorEtiquetas();
-		Etiquetas entidad2 = new Etiquetas();
+		GestorEtiqueta gestor = new GestorEtiqueta();
+		Etiqueta entidad2 = new Etiqueta();
 
 		entidad2.setFilas(3);
 		entidad2.setColumnas(5);

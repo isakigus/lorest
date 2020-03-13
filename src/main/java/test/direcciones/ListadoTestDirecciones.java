@@ -1,24 +1,24 @@
-package test.direcciones;
+package test.direccion;
 
 import java.util.List;
 
-import BO.GestorDirecciones;
-import DAO.DaoDirecciones;
-import VO.Direcciones;
+import muela.BO.GestorDireccion;
+import muela.DAO.DaoDireccion;
+import muela.VO.Direccion;
 
-public class ListadoTestDirecciones {
+public class ListadoTestDireccion {
 
 	public static void main(String[] args) {
 
-		DaoDirecciones dao = new DaoDirecciones();
+		DaoDireccion dao = new DaoDireccion();
 
-		List<Direcciones> listado = dao.listarTodasDirecciones();
+		List<Direccion> listado = dao.listarTodasDireccion();
 
 		System.out.println(listado);
 
-		GestorDirecciones gestor = new GestorDirecciones();
+		GestorDireccion gestor = new GestorDireccion();
 
-		List<Direcciones> listado2 = gestor.listarDirecciones();
+		List<Direccion> listado2 = gestor.listarDireccion();
 
 		System.out.println(listado2);
 

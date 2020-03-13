@@ -1,27 +1,27 @@
-package test.etiquetasEnvio;
+package test.etiquetaEnvio;
 
-import BO.GestorEtiquetasEnvio;
-import DAO.DaoEtiquetasEnvio;
-import VO.EtiquetasEnvio;
+import muela.BO.GestorEtiquetaEnvio;
+import muela.DAO.DaoEtiquetaEnvio;
+import muela.VO.EtiquetaEnvio;
 
-public class BorrarTestEtiquetasEnvio {
-	
+public class BorrarTestEtiquetaEnvio {
+
 	public static void main(String[] args) {
 
-		DaoEtiquetasEnvio dao = new DaoEtiquetasEnvio();
+		DaoEtiquetaEnvio dao = new DaoEtiquetaEnvio();
 
-		EtiquetasEnvio objetoBorrar = new EtiquetasEnvio();
+		EtiquetaEnvio objetoBorrar = new EtiquetaEnvio();
 
 		objetoBorrar.setIdEtiquetaEnvio(11);
 
 		boolean borrado = dao.borrarEtiquetaEnvio(objetoBorrar);
 
 		System.out.println(borrado);
-		
 
-		GestorEtiquetasEnvio gestor = new GestorEtiquetasEnvio();
 
-		EtiquetasEnvio entidad = new EtiquetasEnvio();
+		GestorEtiquetaEnvio gestor = new GestorEtiquetaEnvio();
+
+		EtiquetaEnvio entidad = new EtiquetaEnvio();
 
 		entidad.setIdEtiquetaEnvio(12);
 		boolean borrada = gestor.borrarEtiquetaEnvio(entidad);

@@ -1,4 +1,4 @@
-package DAO;
+package muela.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,12 +11,12 @@ import java.util.TimeZone;
 
 import org.springframework.stereotype.Repository;
 
-import VO.EtiquetasEnvio;
+import muela.VO.EtiquetaEnvio;
 
 @Repository
-public class DaoEtiquetasEnvio {
+public class DaoEtiquetaEnvio {
 
-	public DaoEtiquetasEnvio() {
+	public DaoEtiquetaEnvio() {
 		super();
 	}
 
@@ -47,11 +47,11 @@ public class DaoEtiquetasEnvio {
 		}
 	}
 
-	public boolean crearEtiquetaEnvio(EtiquetasEnvio etiquetaEnvio) {
+	public boolean crearEtiquetaEnvio(EtiquetaEnvio etiquetaEnvio) {
 		if (!abrirConexion()) {
 			return false;
 		}
-		String query = "insert into etiquetasEnvio (idEmpresaMensajes, idEmpresaEmisora,idEmpresaReceptora,expedicion,referencia,kilos,bultos,reembolso) values(?,?,?,?,?,?,?,?)";
+		String query = "insert into etiquetaEnvio (idEmpresaMensajes, idEmpresaEmisora,idEmpresaReceptora,expedicion,referencia,kilos,bultos,reembolso) values(?,?,?,?,?,?,?,?)";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
@@ -80,11 +80,11 @@ public class DaoEtiquetasEnvio {
 		}
 	}
 
-	public boolean modificarEtiquetaEnvio(EtiquetasEnvio etiquetaEnvio) {
+	public boolean modificarEtiquetaEnvio(EtiquetaEnvio etiquetaEnvio) {
 		if (!abrirConexion()) {
 			return false;
 		}
-		String query = "update etiquetasEnvio set idEmpresaMensajes=?, idEmpresaEmisora=?, idEmpresaReceptora=?, expedicion=?, referencia=?, kilos=?, bultos=?, reembolso=? where idEtiquetaEnvio=?";
+		String query = "update etiquetaEnvio set idEmpresaMensajes=?, idEmpresaEmisora=?, idEmpresaReceptora=?, expedicion=?, referencia=?, kilos=?, bultos=?, reembolso=? where idEtiquetaEnvio=?";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
@@ -114,12 +114,12 @@ public class DaoEtiquetasEnvio {
 		}
 	}
 
-	public boolean borrarEtiquetaEnvio(EtiquetasEnvio etiquetaEnvio) {
+	public boolean borrarEtiquetaEnvio(EtiquetaEnvio etiquetaEnvio) {
 		if (!abrirConexion()) {
 			return false;
 		}
 
-		String query = "delete from etiquetasEnvio where idEtiquetaEnvio=?";
+		String query = "delete from etiquetaEnvio where idEtiquetaEnvio=?";
 
 		try {
 
@@ -142,12 +142,12 @@ public class DaoEtiquetasEnvio {
 		}
 	}
 
-	public EtiquetasEnvio obtenerEtiquetaEnvio(int idEtiquetaEnvio) {
+	public EtiquetaEnvio obtenerEtiquetaEnvio(int idEtiquetaEnvio) {
 		if (!abrirConexion()) {
 			return null;
 		}
 
-		String query = "select idEtiquetaEnvio,idEmpresaMensajes,idEmpresaEmisora,idEmpresaReceptora,expedicion,referencia,kilos,bultos,reembolso from etiquetasEnvio where idEtiquetaEnvio=?";
+		String query = "select idEtiquetaEnvio,idEmpresaMensajes,idEmpresaEmisora,idEmpresaReceptora,expedicion,referencia,kilos,bultos,reembolso from etiquetaEnvio where idEtiquetaEnvio=?";
 
 		try {
 
@@ -155,11 +155,11 @@ public class DaoEtiquetasEnvio {
 			ps.setInt(1, idEtiquetaEnvio);
 
 			ResultSet rs = ps.executeQuery();
-			EtiquetasEnvio etiquetaEnvio = null;
+			EtiquetaEnvio etiquetaEnvio = null;
 
 			while (rs.next()) {
 
-				etiquetaEnvio = new EtiquetasEnvio();
+				etiquetaEnvio = new EtiquetaEnvio();
 
 				etiquetaEnvio.setIdEtiquetaEnvio(rs.getInt(1));
 				etiquetaEnvio.setIdEmpresaMensajes(rs.getInt(2));
@@ -183,23 +183,23 @@ public class DaoEtiquetasEnvio {
 
 	}
 
-	public List<EtiquetasEnvio> listarTodasEtiquetasEnvio() {
+	public List<EtiquetaEnvio> listarTodasEtiquetaEnvio() {
 		if (!abrirConexion()) {
 			return null;
 		}
 
-		String query = "select idEtiquetaEnvio,idEmpresaMensajes,idEmpresaEmisora,idEmpresaReceptora,expedicion,referencia,kilos,bultos,reembolso from etiquetasEnvio";
+		String query = "select idEtiquetaEnvio,idEmpresaMensajes,idEmpresaEmisora,idEmpresaReceptora,expedicion,referencia,kilos,bultos,reembolso from etiquetaEnvio";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
-			EtiquetasEnvio etiquetaEnvio = null;
+			EtiquetaEnvio etiquetaEnvio = null;
 
-			List<EtiquetasEnvio> listadoEtiquetasEnvio = new ArrayList<EtiquetasEnvio>();
+			List<EtiquetaEnvio> listadoEtiquetaEnvio = new ArrayList<EtiquetaEnvio>();
 
 			while (rs.next()) {
 
-				etiquetaEnvio = new EtiquetasEnvio();
+				etiquetaEnvio = new EtiquetaEnvio();
 
 				etiquetaEnvio.setIdEtiquetaEnvio(rs.getInt(1));
 				etiquetaEnvio.setIdEmpresaMensajes(rs.getInt(2));
@@ -211,12 +211,12 @@ public class DaoEtiquetasEnvio {
 				etiquetaEnvio.setBultos(rs.getString(8));
 				etiquetaEnvio.setReembolso(rs.getInt(9));
 
-				listadoEtiquetasEnvio.add(etiquetaEnvio);
+				listadoEtiquetaEnvio.add(etiquetaEnvio);
 			}
-			return listadoEtiquetasEnvio;
+			return listadoEtiquetaEnvio;
 
 		} catch (SQLException e) {
-			System.out.println("Error al mostrar listado de etiquetas de envio");
+			System.out.println("Error al mostrar listado de etiqueta de envio");
 			e.printStackTrace();
 			return null;
 		} finally {

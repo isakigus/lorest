@@ -2,9 +2,9 @@ package test.cliente;
 
 import java.util.List;
 
-import BO.GestorCliente;
-import DAO.DaoCliente;
-import VO.Cliente;
+import muela.BO.GestorCliente;
+import muela.DAO.DaoCliente;
+import muela.VO.Cliente;
 
 public class ListadoTestCliente {
 

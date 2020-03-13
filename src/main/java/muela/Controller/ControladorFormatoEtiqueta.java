@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import BO.GestorFormatoEtiquetas;
-import VO.EtiquetasEnvio;
-import VO.FormatoEtiqueta;
+import muela.BO.GestorFormatoEtiqueta;
+import muela.VO.EtiquetaEnvio;
+import muela.VO.FormatoEtiqueta;
 
 @RestController
 public class ControladorFormatoEtiqueta {
 
-	GestorFormatoEtiquetas gestorFormatoEtiquetas = new GestorFormatoEtiquetas();
+	GestorFormatoEtiqueta gestorFormatoEtiqueta = new GestorFormatoEtiqueta();
 
 	@PostMapping(path = "formatoEtiqueta/crear", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<FormatoEtiqueta> crear(@RequestBody FormatoEtiqueta formatoEtiqueta) {
 
-		boolean formatoEtiquetacreado = gestorFormatoEtiquetas.crearFormatoEtiqueta(formatoEtiqueta);
+		boolean formatoEtiquetacreado = gestorFormatoEtiqueta.crearFormatoEtiqueta(formatoEtiqueta);
 		if (formatoEtiquetacreado) {
 
 			return new ResponseEntity<FormatoEtiqueta>(formatoEtiqueta, HttpStatus.CREATED);
@@ -40,7 +40,7 @@ public class ControladorFormatoEtiqueta {
 	public ResponseEntity<FormatoEtiqueta> modificar(@RequestBody FormatoEtiqueta formatoEtiqueta,
 			@PathVariable Integer idFormatoEtiqueta) {
 
-		boolean formatoEtiquetaModificado = gestorFormatoEtiquetas.modificarFormatoEtiqueta(formatoEtiqueta);
+		boolean formatoEtiquetaModificado = gestorFormatoEtiqueta.modificarFormatoEtiqueta(formatoEtiqueta);
 		if (formatoEtiquetaModificado) {
 
 			return new ResponseEntity<FormatoEtiqueta>(formatoEtiqueta, HttpStatus.OK);
@@ -56,7 +56,7 @@ public class ControladorFormatoEtiqueta {
 		FormatoEtiqueta formatoEtiqueta = new FormatoEtiqueta();
 		formatoEtiqueta.setIdFormato(idFormatoEtiqueta);
 
-		boolean formatoEtiquetaEnvioBorrada = gestorFormatoEtiquetas.borrarFormatoEtiqueta(formatoEtiqueta);
+		boolean formatoEtiquetaEnvioBorrada = gestorFormatoEtiqueta.borrarFormatoEtiqueta(formatoEtiqueta);
 		if (formatoEtiquetaEnvioBorrada) {
 
 			return new ResponseEntity<FormatoEtiqueta>(HttpStatus.OK);
@@ -69,7 +69,7 @@ public class ControladorFormatoEtiqueta {
 
 	public ResponseEntity<FormatoEtiqueta> obtener(@PathVariable("idFormatoEtiqueta") Integer idFormatoEtiqueta) {
 
-		FormatoEtiqueta formatoEtiquetaObtenida = gestorFormatoEtiquetas.obtenerFormatoEtiqueta(idFormatoEtiqueta);
+		FormatoEtiqueta formatoEtiquetaObtenida = gestorFormatoEtiqueta.obtenerFormatoEtiqueta(idFormatoEtiqueta);
 		if (formatoEtiquetaObtenida != null) {
 
 			return new ResponseEntity<FormatoEtiqueta>(HttpStatus.OK);
@@ -81,7 +81,7 @@ public class ControladorFormatoEtiqueta {
 	@GetMapping(path = "formatosEtiqueta", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<FormatoEtiqueta> listar() {
 
-		List<FormatoEtiqueta> listaFormatoEtiquetas = gestorFormatoEtiquetas.listarFormatoEtiquetas();
+		List<FormatoEtiqueta> listaFormatoEtiqueta = gestorFormatoEtiqueta.listarFormatoEtiqueta();
 		return new ResponseEntity<FormatoEtiqueta>(HttpStatus.OK);
 	}
 

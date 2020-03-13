@@ -1,6 +1,22 @@
-package VO;
+package muela.entities;
 
-public class Direcciones {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Entity
+@Table(name = "direccion")
+@Component
+@Scope("prototype")
+public class Direccion {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idDireccion;
 	private String direccion;
 	private String codigoPostal;
@@ -40,7 +56,7 @@ public class Direcciones {
 
 	@Override
 	public String toString() {
-		return "Direcciones [idDireccion=" + idDireccion + ", direccion=" + direccion + ", codigoPostal=" + codigoPostal
+		return "Direccion [idDireccion=" + idDireccion + ", direccion=" + direccion + ", codigoPostal=" + codigoPostal
 				+ ", destino=" + destino + "]";
 	}
 

@@ -2,12 +2,12 @@ package test.empresa;
 
 import java.util.List;
 
-import BO.GestorEmpresa;
-import DAO.DaoEmpresa;
-import VO.Empresa;
+import muela.BO.GestorEmpresa;
+import muela.DAO.DaoEmpresa;
+import muela.VO.Empresa;
 
 public class ListadoTestEmpresa {
-	
+
 	public static void main(String[] args) {
 
 		DaoEmpresa dao = new DaoEmpresa();

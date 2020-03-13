@@ -1,16 +1,16 @@
-package test.direcciones;
+package test.direccion;
 
-import BO.GestorDirecciones;
-import DAO.DaoDirecciones;
-import VO.Direcciones;
+import muela.BO.GestorDireccion;
+import muela.DAO.DaoDireccion;
+import muela.VO.Direccion;
 
 public class BorrarTestDireccion {
 
 	public static void main(String[] args) {
 
-		DaoDirecciones dao = new DaoDirecciones();
+		DaoDireccion dao = new DaoDireccion();
 
-		Direcciones objetoBorrar = new Direcciones();
+		Direccion objetoBorrar = new Direccion();
 
 		objetoBorrar.setIdDireccion(6);
 
@@ -18,9 +18,9 @@ public class BorrarTestDireccion {
 
 		System.out.println(borrado);
 
-		GestorDirecciones gestor = new GestorDirecciones();
+		GestorDireccion gestor = new GestorDireccion();
 
-		Direcciones entidad = new Direcciones();
+		Direccion entidad = new Direccion();
 
 		entidad.setIdDireccion(7);
 

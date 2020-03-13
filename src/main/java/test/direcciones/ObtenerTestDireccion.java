@@ -1,22 +1,22 @@
-package test.direcciones;
+package test.direccion;
 
-import BO.GestorDirecciones;
-import DAO.DaoDirecciones;
-import VO.Direcciones;
+import muela.BO.GestorDireccion;
+import muela.DAO.DaoDireccion;
+import muela.VO.Direccion;
 
 public class ObtenerTestDireccion {
 
 	public static void main(String[] args) {
 
-		DaoDirecciones dao = new DaoDirecciones();
+		DaoDireccion dao = new DaoDireccion();
 
-		Direcciones selecionado = dao.obtenerDireccion(3);
+		Direccion selecionado = dao.obtenerDireccion(3);
 
 		System.out.println(selecionado);
 
-		GestorDirecciones gestor = new GestorDirecciones();
+		GestorDireccion gestor = new GestorDireccion();
 
-		Direcciones selecionado2 = gestor.obtenerDireccion(3);
+		Direccion selecionado2 = gestor.obtenerDireccion(3);
 
 		System.out.println(selecionado2);
 

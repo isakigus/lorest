@@ -1,4 +1,4 @@
-package DAO;
+package muela.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,22 +8,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
-
 import org.springframework.stereotype.Repository;
 
-import VO.Direcciones;;
+import muela.VO.Empresa;
 
 @Repository
-public class DaoDirecciones {
+public class DaoEmpresa {
 
-	public DaoDirecciones() {
+
+	public DaoEmpresa() {
 		super();
-
 	}
 
 	private Connection conexion;
-
-
 
 	public boolean abrirConexion() {
 		String url = "jdbc:mysql://localhost:3306/muela?serverTimezone=" + TimeZone.getDefault().getID();
@@ -50,45 +47,17 @@ public class DaoDirecciones {
 		}
 	}
 
-	public boolean crearDireccion(Direcciones direcciones) {
+	public boolean crearEmpresa(Empresa empresa) {
 		if (!abrirConexion()) {
 			return false;
 		}
-		String query = "insert into direcciones (direccion, codigoPostal, destino) values(?,?,?)";
-
-		try {
-			PreparedStatement ps = conexion.prepareStatement(query);
-			ps.setString(1, direcciones.getDireccion());
-			ps.setString(2, direcciones.getCodigoPostal());
-			ps.setString(3, direcciones.getDestino());
-			int numeroFilas = ps.executeUpdate();
-			if (numeroFilas == 0) {
-				return false;
-			} else {
-				return true;
-			}
-		} catch (SQLException e) {
-			System.out.println("Error al crear la direccion");
-			e.printStackTrace();
-			return false;
-		} finally {
-			cerrarConexion();
-		}
-	}
-
-	public boolean modificarDireccion(Direcciones direccion) {
-		if (!abrirConexion()) {
-			return false;
-		}
-		String query = "update direcciones set direccion=?, codigoPostal=?, destino=?  where idDireccion=?";
+		String query = "insert into empresas (nombreEmpresa, idDireccion) values(?,?)";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
 
-			ps.setString(1, direccion.getDireccion());
-			ps.setString(2, direccion.getCodigoPostal());
-			ps.setString(3, direccion.getDestino());
-			ps.setInt(4, direccion.getIdDireccion());
+			ps.setString(1, empresa.getNombreEmpresa());
+			ps.setInt(2, empresa.getIdDireccion());
 
 			int numeroFilas = ps.executeUpdate();
 			if (numeroFilas == 0) {
@@ -97,7 +66,7 @@ public class DaoDirecciones {
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Error al modificar la direccion");
+			System.out.println("Error al crear empresa");
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -105,17 +74,19 @@ public class DaoDirecciones {
 		}
 	}
 
-	public boolean borrarDireccion(Direcciones direccion) {
+	public boolean modificarEmpresa(Empresa empresa) {
 		if (!abrirConexion()) {
 			return false;
 		}
-
-		String query = "delete from direcciones where idDireccion=?";
+		String query = "update empresas set nombreEmpresa=?" + ", idDireccion=? where idEmpresa=?";
 
 		try {
-
 			PreparedStatement ps = conexion.prepareStatement(query);
-			ps.setInt(1, direccion.getIdDireccion());
+
+			ps.setString(1, empresa.getNombreEmpresa());
+			ps.setInt(2, empresa.getIdDireccion());
+			ps.setInt(3, empresa.getIdEmpresa());
+
 			int numeroFilas = ps.executeUpdate();
 			if (numeroFilas == 0) {
 				return false;
@@ -123,7 +94,7 @@ public class DaoDirecciones {
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Error al borrar la direccion");
+			System.out.println("Error al modificar empresa");
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -131,33 +102,58 @@ public class DaoDirecciones {
 		}
 	}
 
-	public Direcciones obtenerDireccion(int idDireccion) {
+	public boolean borrarEmpresa(Empresa empresa) {
+		if (!abrirConexion()) {
+			return false;
+		}
+
+		String query = "delete from empresas where idEmpresa=?";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(query);
+			ps.setInt(1, empresa.getIdEmpresa());
+			int numeroFilas = ps.executeUpdate();
+			if (numeroFilas == 0) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Error al borrar empresa");
+			e.printStackTrace();
+			return false;
+		} finally {
+			cerrarConexion();
+		}
+	}
+
+	public Empresa obtenerEmpresa(int idEmpresa) {
 		if (!abrirConexion()) {
 			return null;
 		}
 
-		String query = "select idDireccion, direccion, codigoPostal, destino from direcciones where idDireccion=?";
+		String query = "select idEmpresa,nombreEmpresa,idDireccion from empresas where idEmpresa=?";
 
 		try {
 
 			PreparedStatement ps = conexion.prepareStatement(query);
-			ps.setInt(1, idDireccion);
+			ps.setInt(1, idEmpresa);
 
 			ResultSet rs = ps.executeQuery();
-			Direcciones direccion = null;
+			Empresa empresa = null;
 
 			while (rs.next()) {
+				empresa = new Empresa();
 
-				direccion = new Direcciones();
-				direccion.setIdDireccion(rs.getInt(1));
-				direccion.setDireccion(rs.getString(2));
-				direccion.setCodigoPostal(rs.getString(3));
-				direccion.setDestino(rs.getString(4));
+				empresa.setIdEmpresa(rs.getInt(1));
+				empresa.setNombreEmpresa(rs.getString(2));
+				empresa.setIdDireccion(rs.getInt(3));
 
 			}
-			return direccion;
+			return empresa;
 		} catch (SQLException e) {
-			System.out.println("Error al obtener cliente");
+			System.out.println("Error al otener empresa");
 			e.printStackTrace();
 			return null;
 		} finally {
@@ -166,29 +162,29 @@ public class DaoDirecciones {
 
 	}
 
-	public List<Direcciones> listarTodasDirecciones() {
+	public List<Empresa> listarEmpresas() {
 		if (!abrirConexion()) {
 			return null;
 		}
 
-		String query = "select idDireccion,direccion,codigoPostal,destino from direcciones";
+		String query = "select idEmpresa,nombreEmpresa,idDireccion from empresas";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
-			Direcciones direccion = null;
-			List<Direcciones> listadoDirecciones = new ArrayList<Direcciones>();
+			Empresa empresa = null;
+			List<Empresa> listadoEmpresas = new ArrayList<Empresa>();
 			while (rs.next()) {
-				direccion = new Direcciones();
-				direccion.setIdDireccion(rs.getInt(1));
-				direccion.setDireccion(rs.getString(2));
-				direccion.setCodigoPostal(rs.getString(3));
-				direccion.setDestino(rs.getString(4));
-				listadoDirecciones.add(direccion);
+				empresa = new Empresa();
+				empresa.setIdEmpresa(rs.getInt(1));
+				empresa.setNombreEmpresa(rs.getString(2));
+				empresa.setIdDireccion(rs.getInt(3));
+
+				listadoEmpresas.add(empresa);
 			}
-			return listadoDirecciones;
+			return listadoEmpresas;
 		} catch (SQLException e) {
-			System.out.println("Error al listar las direcciones");
+			System.out.println("Error al listar las empresas");
 			e.printStackTrace();
 			return null;
 		} finally {

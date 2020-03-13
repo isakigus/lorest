@@ -1,9 +1,9 @@
 package test.empresa;
 
-import BO.GestorEmpresa;
-import DAO.DaoEmpresa;
+import muela.BO.GestorEmpresa;
+import muela.DAO.DaoEmpresa;
 
-import VO.Empresa;
+import muela.VO.Empresa;
 
 public class AltaTestEmpresa {
 

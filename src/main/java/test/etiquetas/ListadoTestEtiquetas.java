@@ -1,24 +1,24 @@
-package test.etiquetas;
+package test.etiqueta;
 
 import java.util.List;
 
-import BO.GestorEtiquetas;
-import DAO.DaoEtiquetas;
-import VO.Etiquetas;
+import muela.BO.GestorEtiqueta;
+import muela.DAO.DaoEtiqueta;
+import muela.VO.Etiqueta;
 
-public class ListadoTestEtiquetas {
+public class ListadoTestEtiqueta {
 
 	public static void main(String[] args) {
 
-		DaoEtiquetas dao = new DaoEtiquetas();
+		DaoEtiqueta dao = new DaoEtiqueta();
 
-		List<Etiquetas> listado = dao.listarTodasEtiquetas();
+		List<Etiqueta> listado = dao.listarTodasEtiqueta();
 
 		System.out.println(listado);
 
-		GestorEtiquetas gestor = new GestorEtiquetas();
+		GestorEtiqueta gestor = new GestorEtiqueta();
 
-		List<Etiquetas> listado2 = gestor.listaEtiquetas();
+		List<Etiqueta> listado2 = gestor.listaEtiqueta();
 
 		System.out.println(listado2);
 

@@ -1,8 +1,8 @@
 package test.formatoEtiqueta;
 
-import BO.GestorFormatoEtiquetas;
-import DAO.DaoFormatoEtiqueta;
-import VO.FormatoEtiqueta;
+import muela.BO.GestorFormatoEtiqueta;
+import muela.DAO.DaoFormatoEtiqueta;
+import muela.VO.FormatoEtiqueta;
 
 public class ModificarTestFormatoEtiqueta {
 
@@ -24,7 +24,7 @@ public class ModificarTestFormatoEtiqueta {
 
 		System.out.println(modificar);
 
-		GestorFormatoEtiquetas gestor = new GestorFormatoEtiquetas();
+		GestorFormatoEtiqueta gestor = new GestorFormatoEtiqueta();
 
 		FormatoEtiqueta prueba2 = new FormatoEtiqueta();
 

@@ -1,4 +1,4 @@
-package VO;
+package muela.VO;
 
 import java.sql.Blob;
 

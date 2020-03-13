@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>muela</groupId>
-	<artifactId>etiquetasSBM</artifactId>
+	<artifactId>etiquetaSBM</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>etiquetasSBM</name>
+	<name>etiquetaSBM</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

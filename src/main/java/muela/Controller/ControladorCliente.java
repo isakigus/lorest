@@ -13,80 +13,64 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import BO.GestorCliente;
-import VO.Cliente;
+import muela.BO.GestorCliente;
+import muela.VO.Cliente;
 
 @RestController
 public class ControladorCliente {
 
 	GestorCliente gestorCliente = new GestorCliente();
 
-	@PostMapping(path = "cliente/crear", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "clientes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Cliente> crear(@RequestBody Cliente cliente) {
 
-		boolean ClienteCreado = gestorCliente.crearCliente(cliente);
+		boolean clienteCreado = gestorCliente.crearCliente(cliente);
 
-		if (ClienteCreado) {
+		HttpStatus httpStatus = (clienteCreado)? HttpStatus.OK: HttpStatus.NOT_FOUND;
 
-			return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
-		} else {
-
-			return new ResponseEntity<Cliente>(cliente, HttpStatus.NOT_FOUND);
-		}
+		return new ResponseEntity<Cliente>(cliente, httpStatus);
 
 	}
 
-	@PutMapping(path = "cliente/modificar/{idCliente}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-
+	@PutMapping(path = "clientes/{idCliente}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Cliente> modificar(@RequestBody Cliente cliente, @PathVariable Integer idCliente) {
 
-		boolean ClienteModificado = gestorCliente.modificarCliente(cliente);
+		boolean clienteModificado = gestorCliente.modificarCliente(cliente);
 
-		if (ClienteModificado) {
+		HttpStatus httpStatus = (clienteModificado)? HttpStatus.OK: HttpStatus.NOT_FOUND;
 
-			return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
-		} else {
-
-			return new ResponseEntity<Cliente>(cliente, HttpStatus.NOT_FOUND);
-		}
+		return new ResponseEntity<Cliente>(cliente, httpStatus);
 	}
 
-	@DeleteMapping(path = "Cliente/borrar/{idCliente}")
+	@DeleteMapping(path = "clientes/{idCliente}")
 	public ResponseEntity<Cliente> borrar(@PathVariable Integer idCliente) {
 
 		Cliente cliente = new Cliente();
 		cliente.setIdCliente(idCliente);
 
-		boolean ClienteBorrado = gestorCliente.borrarCliente(cliente);
+		boolean clienteBorrado = gestorCliente.borrarCliente(cliente);
 
-		if (ClienteBorrado) {
+		HttpStatus httpStatus = (clienteBorrado)? HttpStatus.OK: HttpStatus.NOT_FOUND;
 
-			return new ResponseEntity<Cliente>(HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Cliente>(HttpStatus.NOT_FOUND);
-		}
+		return new ResponseEntity<Cliente>(cliente, httpStatus);
 	}
 
-	@GetMapping(path = "cliente/obtener/{idCliente}", produces = MediaType.APPLICATION_JSON_VALUE)
-
+	@GetMapping(path = "clientes/{idCliente}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Cliente> obtener(@PathVariable("idCliente") Integer idCliente) {
 
 		Cliente clienteObtenido = gestorCliente.obtenerCliente(idCliente);
 
-		if (clienteObtenido != null) {
+		HttpStatus httpStatus = (clienteObtenido != null)? HttpStatus.OK: HttpStatus.NOT_FOUND;
 
-			return new ResponseEntity<Cliente>(HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Cliente>(HttpStatus.NOT_FOUND);
-		}
+		return new ResponseEntity<Cliente>(clienteObtenido, httpStatus);
 
 	}
 
 	@GetMapping(path = "clientes", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Cliente> listar() {
+	public ResponseEntity<List<Cliente>> listar() {
 
 		List<Cliente> listaClientes = gestorCliente.listarClientes();
 
-		return new ResponseEntity<Cliente>(HttpStatus.OK);
+		return new ResponseEntity<List<Cliente>>(listaClientes, HttpStatus.OK);
 	}
 }

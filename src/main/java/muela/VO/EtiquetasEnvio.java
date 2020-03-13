@@ -1,6 +1,6 @@
-package VO;
+package muela.VO;
 
-public class EtiquetasEnvio {
+public class EtiquetaEnvio {
 
 	private int idEtiquetaEnvio;
 	private int idEmpresaMensajes;
@@ -86,7 +86,7 @@ public class EtiquetasEnvio {
 
 	@Override
 	public String toString() {
-		return "EtiquetasEnvio [idEtiquetaEnvio=" + idEtiquetaEnvio + ", idEmpresaMensajes=" + idEmpresaMensajes
+		return "EtiquetaEnvio [idEtiquetaEnvio=" + idEtiquetaEnvio + ", idEmpresaMensajes=" + idEmpresaMensajes
 				+ ", idEmpresaEmisora=" + idEmpresaEmisora + ", idEmpresaReceptora=" + idEmpresaReceptora
 				+ ", expedicion=" + expedicion + ", referencia=" + referencia + ", kilos=" + kilos + ", bultos="
 				+ bultos + ", reembolso=" + reembolso + "]";

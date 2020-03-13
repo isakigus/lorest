@@ -1,4 +1,4 @@
-package DAO;
+package muela.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,15 +8,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
+
 import org.springframework.stereotype.Repository;
 
-import VO.Empresa;
+import muela.VO.Cliente;
 
 @Repository
-public class DaoEmpresa {
+public class DaoCliente {
 
-
-	public DaoEmpresa() {
+	public DaoCliente() {
 		super();
 	}
 
@@ -47,17 +47,47 @@ public class DaoEmpresa {
 		}
 	}
 
-	public boolean crearEmpresa(Empresa empresa) {
+	public boolean crearCliente(Cliente cliente) {
 		if (!abrirConexion()) {
 			return false;
 		}
-		String query = "insert into empresas (nombreEmpresa, idDireccion) values(?,?)";
+		String query = "insert into cliente (eanColumn1, codigoCliente, codigoBarras, idEmpresa) values(?,?,?,?)";
+
+		try {
+			PreparedStatement ps = conexion.prepareStatement(query);
+			ps.setString(1, cliente.getEanColumn1());
+			ps.setString(2, cliente.getCodigoCliente());
+			ps.setBlob(3, cliente.getCodigoBarras());
+			ps.setInt(4, cliente.getIdEmpresa());
+			int numeroFilas = ps.executeUpdate();
+			if (numeroFilas == 0) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Error al crear cliente");
+			e.printStackTrace();
+			return false;
+		} finally {
+			cerrarConexion();
+		}
+	}
+
+	public boolean modificarCliente(Cliente cliente) {
+		if (!abrirConexion()) {
+			return false;
+		}
+		String query = "update cliente set eanColumn1=?, codigoCliente=?, codigoBarras=?, idEmpresa=?  where idCliente=?";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
 
-			ps.setString(1, empresa.getNombreEmpresa());
-			ps.setInt(2, empresa.getIdDireccion());
+			ps.setString(1, cliente.getEanColumn1());
+			ps.setString(2, cliente.getCodigoCliente());
+			ps.setBlob(3, cliente.getCodigoBarras());
+			ps.setInt(4, cliente.getIdEmpresa());
+			ps.setInt(5, cliente.getIdCliente());
 
 			int numeroFilas = ps.executeUpdate();
 			if (numeroFilas == 0) {
@@ -66,7 +96,7 @@ public class DaoEmpresa {
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Error al crear empresa");
+			System.out.println("Error al modificar cliente");
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -74,18 +104,18 @@ public class DaoEmpresa {
 		}
 	}
 
-	public boolean modificarEmpresa(Empresa empresa) {
+	public boolean borrarCliente(Cliente cliente) {
 		if (!abrirConexion()) {
 			return false;
 		}
-		String query = "update empresas set nombreEmpresa=?" + ", idDireccion=? where idEmpresa=?";
+
+		String query = "delete from cliente where idCliente=?";
 
 		try {
+
 			PreparedStatement ps = conexion.prepareStatement(query);
 
-			ps.setString(1, empresa.getNombreEmpresa());
-			ps.setInt(2, empresa.getIdDireccion());
-			ps.setInt(3, empresa.getIdEmpresa());
+			ps.setInt(1, cliente.getIdCliente());
 
 			int numeroFilas = ps.executeUpdate();
 			if (numeroFilas == 0) {
@@ -94,7 +124,7 @@ public class DaoEmpresa {
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Error al modificar empresa");
+			System.out.println("Error al borrar cliente");
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -102,58 +132,33 @@ public class DaoEmpresa {
 		}
 	}
 
-	public boolean borrarEmpresa(Empresa empresa) {
-		if (!abrirConexion()) {
-			return false;
-		}
-
-		String query = "delete from empresas where idEmpresa=?";
-
-		try {
-
-			PreparedStatement ps = conexion.prepareStatement(query);
-			ps.setInt(1, empresa.getIdEmpresa());
-			int numeroFilas = ps.executeUpdate();
-			if (numeroFilas == 0) {
-				return false;
-			} else {
-				return true;
-			}
-		} catch (SQLException e) {
-			System.out.println("Error al borrar empresa");
-			e.printStackTrace();
-			return false;
-		} finally {
-			cerrarConexion();
-		}
-	}
-
-	public Empresa obtenerEmpresa(int idEmpresa) {
+	public Cliente obtenerCliente(int idCliente) {
 		if (!abrirConexion()) {
 			return null;
 		}
 
-		String query = "select idEmpresa,nombreEmpresa,idDireccion from empresas where idEmpresa=?";
+		String query = "select idCliente,eanColumn1,codigoCliente,codigoBarras,idEmpresa from cliente where idCliente=?";
 
 		try {
 
 			PreparedStatement ps = conexion.prepareStatement(query);
-			ps.setInt(1, idEmpresa);
+			ps.setInt(1, idCliente);
 
 			ResultSet rs = ps.executeQuery();
-			Empresa empresa = null;
+			Cliente cliente = null;
 
 			while (rs.next()) {
-				empresa = new Empresa();
-
-				empresa.setIdEmpresa(rs.getInt(1));
-				empresa.setNombreEmpresa(rs.getString(2));
-				empresa.setIdDireccion(rs.getInt(3));
+				cliente = new Cliente();
+				cliente.setIdCliente(rs.getInt(1));
+				cliente.setEanColumn1(rs.getString(2));
+				cliente.setCodigoCliente(rs.getString(3));
+				cliente.setCodigoBarras(rs.getBlob(4));
+				cliente.setIdEmpresa(rs.getInt(5));
 
 			}
-			return empresa;
+			return cliente;
 		} catch (SQLException e) {
-			System.out.println("Error al otener empresa");
+			System.out.println("Error al obtener cliente");
 			e.printStackTrace();
 			return null;
 		} finally {
@@ -162,35 +167,46 @@ public class DaoEmpresa {
 
 	}
 
-	public List<Empresa> listarEmpresas() {
+	public List<Cliente> listarTodosClientes() {
 		if (!abrirConexion()) {
 			return null;
 		}
 
-		String query = "select idEmpresa,nombreEmpresa,idDireccion from empresas";
+		String query = "select idCliente,eanColumn1,codigoCliente,codigoBarras,idEmpresa from cliente";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
-			Empresa empresa = null;
-			List<Empresa> listadoEmpresas = new ArrayList<Empresa>();
+			Cliente cliente = null;
+			List<Cliente> listadoClientes = new ArrayList<Cliente>();
 			while (rs.next()) {
-				empresa = new Empresa();
-				empresa.setIdEmpresa(rs.getInt(1));
-				empresa.setNombreEmpresa(rs.getString(2));
-				empresa.setIdDireccion(rs.getInt(3));
 
-				listadoEmpresas.add(empresa);
+				cliente = new Cliente();
+				cliente.setIdCliente(rs.getInt(1));
+				cliente.setEanColumn1(rs.getString(2));
+				cliente.setCodigoCliente(rs.getString(3));
+				cliente.setCodigoBarras(rs.getBlob(4));
+				cliente.setIdEmpresa(rs.getInt(5));
+
+				listadoClientes.add(cliente);
 			}
-			return listadoEmpresas;
+			return listadoClientes;
 		} catch (SQLException e) {
-			System.out.println("Error al listar las empresas");
+			System.out.println("Error al listar los clientes");
 			e.printStackTrace();
 			return null;
 		} finally {
 			cerrarConexion();
 		}
 
+	}
+
+	public Connection getConexion() {
+		return conexion;
+	}
+
+	public void setConexion(Connection conexion) {
+		this.conexion = conexion;
 	}
 
 }

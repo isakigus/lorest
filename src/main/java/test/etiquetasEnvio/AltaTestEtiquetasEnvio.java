@@ -1,16 +1,16 @@
-package test.etiquetasEnvio;
+package test.etiquetaEnvio;
 
-import BO.GestorEtiquetasEnvio;
-import DAO.DaoEtiquetasEnvio;
-import VO.EtiquetasEnvio;
+import muela.BO.GestorEtiquetaEnvio;
+import muela.DAO.DaoEtiquetaEnvio;
+import muela.VO.EtiquetaEnvio;
 
-public class AltaTestEtiquetasEnvio {
+public class AltaTestEtiquetaEnvio {
 
 	public static void main(String[] args) {
 
-		DaoEtiquetasEnvio dao = new DaoEtiquetasEnvio();
+		DaoEtiquetaEnvio dao = new DaoEtiquetaEnvio();
 
-		EtiquetasEnvio entidad = new EtiquetasEnvio();
+		EtiquetaEnvio entidad = new EtiquetaEnvio();
 
 		entidad.setIdEmpresaMensajes(5);
 		entidad.setIdEmpresaEmisora(8);
@@ -25,8 +25,8 @@ public class AltaTestEtiquetasEnvio {
 
 		System.out.println(testAlta);
 
-		GestorEtiquetasEnvio gestor = new GestorEtiquetasEnvio();
-		EtiquetasEnvio entidad2 = new EtiquetasEnvio();
+		GestorEtiquetaEnvio gestor = new GestorEtiquetaEnvio();
+		EtiquetaEnvio entidad2 = new EtiquetaEnvio();
 
 		entidad2.setIdEmpresaMensajes(5);
 		entidad2.setIdEmpresaEmisora(8);
@@ -37,7 +37,7 @@ public class AltaTestEtiquetasEnvio {
 		entidad2.setBultos("4");
 		entidad2.setReembolso(20);
 
-		boolean testGestorAlta = gestor.crearEtiquetasEnvio(entidad2);
+		boolean testGestorAlta = gestor.crearEtiquetaEnvio(entidad2);
 
 		System.out.println(testGestorAlta);
 

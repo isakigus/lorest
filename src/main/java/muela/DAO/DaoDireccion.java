@@ -1,4 +1,4 @@
-package DAO;
+package muela.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,13 +11,14 @@ import java.util.TimeZone;
 
 import org.springframework.stereotype.Repository;
 
-import VO.Cliente;
+import muela.VO.Direccion;;
 
 @Repository
-public class DaoCliente {
+public class DaoDireccion {
 
-	public DaoCliente() {
+	public DaoDireccion() {
 		super();
+
 	}
 
 	private Connection conexion;
@@ -49,18 +50,17 @@ public class DaoCliente {
 		}
 	}
 
-	public boolean crearCliente(Cliente cliente) {
+	public boolean crearDireccion(Direccion direccion) {
 		if (!abrirConexion()) {
 			return false;
 		}
-		String query = "insert into clientes (eanColumn1, codigoCliente, codigoBarras, idEmpresa) values(?,?,?,?)";
+		String query = "insert into direccion (direccion, codigoPostal, destino) values(?,?,?)";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
-			ps.setString(1, cliente.getEanColumn1());
-			ps.setString(2, cliente.getCodigoCliente());
-			ps.setBlob(3, cliente.getCodigoBarras());
-			ps.setInt(4, cliente.getIdEmpresa());
+			ps.setString(1, direccion.getDireccion());
+			ps.setString(2, direccion.getCodigoPostal());
+			ps.setString(3, direccion.getDestino());
 			int numeroFilas = ps.executeUpdate();
 			if (numeroFilas == 0) {
 				return false;
@@ -68,7 +68,7 @@ public class DaoCliente {
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Error al crear cliente");
+			System.out.println("Error al crear la direccion");
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -76,48 +76,19 @@ public class DaoCliente {
 		}
 	}
 
-	public boolean modificarCliente(Cliente cliente) {
+	public boolean modificarDireccion(Direccion direccion) {
 		if (!abrirConexion()) {
 			return false;
 		}
-		String query = "update clientes set eanColumn1=?, codigoCliente=?, codigoBarras=?, idEmpresa=?  where idCliente=?";
+		String query = "update direccion set direccion=?, codigoPostal=?, destino=?  where idDireccion=?";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
 
-			ps.setString(1, cliente.getEanColumn1());
-			ps.setString(2, cliente.getCodigoCliente());
-			ps.setBlob(3, cliente.getCodigoBarras());
-			ps.setInt(4, cliente.getIdEmpresa());
-			ps.setInt(5, cliente.getIdCliente());
-
-			int numeroFilas = ps.executeUpdate();
-			if (numeroFilas == 0) {
-				return false;
-			} else {
-				return true;
-			}
-		} catch (SQLException e) {
-			System.out.println("Error al modificar cliente");
-			e.printStackTrace();
-			return false;
-		} finally {
-			cerrarConexion();
-		}
-	}
-
-	public boolean borrarCliente(Cliente cliente) {
-		if (!abrirConexion()) {
-			return false;
-		}
-
-		String query = "delete from clientes where idCliente=?";
-
-		try {
-
-			PreparedStatement ps = conexion.prepareStatement(query);
-
-			ps.setInt(1, cliente.getIdCliente());
+			ps.setString(1, direccion.getDireccion());
+			ps.setString(2, direccion.getCodigoPostal());
+			ps.setString(3, direccion.getDestino());
+			ps.setInt(4, direccion.getIdDireccion());
 
 			int numeroFilas = ps.executeUpdate();
 			if (numeroFilas == 0) {
@@ -126,7 +97,7 @@ public class DaoCliente {
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Error al borrar cliente");
+			System.out.println("Error al modificar la direccion");
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -134,31 +105,57 @@ public class DaoCliente {
 		}
 	}
 
-	public Cliente obtenerCliente(int idCliente) {
+	public boolean borrarDireccion(Direccion direccion) {
+		if (!abrirConexion()) {
+			return false;
+		}
+
+		String query = "delete from direccion where idDireccion=?";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(query);
+			ps.setInt(1, direccion.getIdDireccion());
+			int numeroFilas = ps.executeUpdate();
+			if (numeroFilas == 0) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Error al borrar la direccion");
+			e.printStackTrace();
+			return false;
+		} finally {
+			cerrarConexion();
+		}
+	}
+
+	public Direccion obtenerDireccion(int idDireccion) {
 		if (!abrirConexion()) {
 			return null;
 		}
 
-		String query = "select idCliente,eanColumn1,codigoCliente,codigoBarras,idEmpresa from clientes where idCliente=?";
+		String query = "select idDireccion, direccion, codigoPostal, destino from direccion where idDireccion=?";
 
 		try {
 
 			PreparedStatement ps = conexion.prepareStatement(query);
-			ps.setInt(1, idCliente);
+			ps.setInt(1, idDireccion);
 
 			ResultSet rs = ps.executeQuery();
-			Cliente cliente = null;
+			Direccion direccion = null;
 
 			while (rs.next()) {
-				cliente = new Cliente();
-				cliente.setIdCliente(rs.getInt(1));
-				cliente.setEanColumn1(rs.getString(2));
-				cliente.setCodigoCliente(rs.getString(3));
-				cliente.setCodigoBarras(rs.getBlob(4));
-				cliente.setIdEmpresa(rs.getInt(5));
+
+				direccion = new Direccion();
+				direccion.setIdDireccion(rs.getInt(1));
+				direccion.setDireccion(rs.getString(2));
+				direccion.setCodigoPostal(rs.getString(3));
+				direccion.setDestino(rs.getString(4));
 
 			}
-			return cliente;
+			return direccion;
 		} catch (SQLException e) {
 			System.out.println("Error al obtener cliente");
 			e.printStackTrace();
@@ -169,46 +166,35 @@ public class DaoCliente {
 
 	}
 
-	public List<Cliente> listarTodosClientes() {
+	public List<Direccion> listarTodasDireccion() {
 		if (!abrirConexion()) {
 			return null;
 		}
 
-		String query = "select idCliente,eanColumn1,codigoCliente,codigoBarras,idEmpresa from clientes";
+		String query = "select idDireccion,direccion,codigoPostal,destino from direccion";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
-			Cliente cliente = null;
-			List<Cliente> listadoClientes = new ArrayList<Cliente>();
+			Direccion direccion = null;
+			List<Direccion> listadoDireccion = new ArrayList<Direccion>();
 			while (rs.next()) {
-
-				cliente = new Cliente();
-				cliente.setIdCliente(rs.getInt(1));
-				cliente.setEanColumn1(rs.getString(2));
-				cliente.setCodigoCliente(rs.getString(3));
-				cliente.setCodigoBarras(rs.getBlob(4));
-				cliente.setIdEmpresa(rs.getInt(5));
-
-				listadoClientes.add(cliente);
+				direccion = new Direccion();
+				direccion.setIdDireccion(rs.getInt(1));
+				direccion.setDireccion(rs.getString(2));
+				direccion.setCodigoPostal(rs.getString(3));
+				direccion.setDestino(rs.getString(4));
+				listadoDireccion.add(direccion);
 			}
-			return listadoClientes;
+			return listadoDireccion;
 		} catch (SQLException e) {
-			System.out.println("Error al listar los clientes");
+			System.out.println("Error al listar las direccion");
 			e.printStackTrace();
 			return null;
 		} finally {
 			cerrarConexion();
 		}
 
-	}
-
-	public Connection getConexion() {
-		return conexion;
-	}
-
-	public void setConexion(Connection conexion) {
-		this.conexion = conexion;
 	}
 
 }

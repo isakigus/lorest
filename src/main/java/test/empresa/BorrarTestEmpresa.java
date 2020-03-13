@@ -1,8 +1,8 @@
 package test.empresa;
 
-import BO.GestorEmpresa;
-import DAO.DaoEmpresa;
-import VO.Empresa;
+import muela.BO.GestorEmpresa;
+import muela.DAO.DaoEmpresa;
+import muela.VO.Empresa;
 
 public class BorrarTestEmpresa {
 
@@ -17,9 +17,9 @@ public class BorrarTestEmpresa {
 		boolean borrado = dao.borrarEmpresa(objetoBorrar);
 
 		System.out.println(borrado);
-		
-		
-		 
+
+
+
 		GestorEmpresa gestor = new GestorEmpresa();
 
 		Empresa entidad = new Empresa();

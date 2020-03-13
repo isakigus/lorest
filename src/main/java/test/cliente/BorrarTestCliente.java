@@ -1,8 +1,8 @@
 package test.cliente;
 
-import BO.GestorCliente;
-import DAO.DaoCliente;
-import VO.Cliente;
+import muela.BO.GestorCliente;
+import muela.DAO.DaoCliente;
+import muela.VO.Cliente;
 
 public class BorrarTestCliente {
 
@@ -17,15 +17,15 @@ public class BorrarTestCliente {
 		boolean borrado = dao.borrarCliente(objetoBorrar);
 
 		System.out.println(borrado);
-		
-		
+
+
 
 		GestorCliente gestor = new GestorCliente();
 
 		Cliente entidad = new Cliente();
 
 		entidad.setIdCliente(13);
-		
+
 		boolean borrada = gestor.borrarCliente(entidad);
 
 		System.out.println(borrada);

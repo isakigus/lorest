@@ -1,4 +1,4 @@
-package BO;
+package muela.BO;
 
 import java.util.List;
 
@@ -7,16 +7,16 @@ import javax.transaction.Transactional;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import DAO.DaoFormatoEtiqueta;
-import VO.FormatoEtiqueta;
+import muela.DAO.DaoFormatoEtiqueta;
+import muela.VO.FormatoEtiqueta;
 
 @Service
-public class GestorFormatoEtiquetas {
+public class GestorFormatoEtiqueta {
 
 	// @Autowired
 	DaoFormatoEtiqueta daoFormatoEtiqueta = new DaoFormatoEtiqueta();
 
-	public GestorFormatoEtiquetas() {
+	public GestorFormatoEtiqueta() {
 		super();
 	}
 
@@ -43,7 +43,7 @@ public class GestorFormatoEtiquetas {
 		return daoFormatoEtiqueta.obtenerEtiquetaEnvio(idFormato);
 	}
 
-	public List<FormatoEtiqueta> listarFormatoEtiquetas() {
+	public List<FormatoEtiqueta> listarFormatoEtiqueta() {
 
 		return daoFormatoEtiqueta.listarFormatosEtiqueta();
 	}

@@ -1,26 +1,26 @@
-package test.etiquetasEnvio;
+package test.etiquetaEnvio;
 
 import java.util.List;
 
-import BO.GestorEtiquetasEnvio;
-import DAO.DaoEtiquetasEnvio;
-import VO.EtiquetasEnvio;
+import muela.BO.GestorEtiquetaEnvio;
+import muela.DAO.DaoEtiquetaEnvio;
+import muela.VO.EtiquetaEnvio;
 
 
 
-public class ListadoTestEtiquetasEnvio {
-	
+public class ListadoTestEtiquetaEnvio {
+
 	public static void main(String[] args) {
 
-		DaoEtiquetasEnvio dao = new DaoEtiquetasEnvio();
+		DaoEtiquetaEnvio dao = new DaoEtiquetaEnvio();
 
-		List<EtiquetasEnvio> listado = dao.listarTodasEtiquetasEnvio();
+		List<EtiquetaEnvio> listado = dao.listarTodasEtiquetaEnvio();
 
 		System.out.println(listado);
 
-		GestorEtiquetasEnvio gestor = new GestorEtiquetasEnvio();
+		GestorEtiquetaEnvio gestor = new GestorEtiquetaEnvio();
 
-		List<EtiquetasEnvio> listado2 = gestor.listarEtiquetasEnvio();
+		List<EtiquetaEnvio> listado2 = gestor.listarEtiquetaEnvio();
 
 		System.out.println(listado2);
 

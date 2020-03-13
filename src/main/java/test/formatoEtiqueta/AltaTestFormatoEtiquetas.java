@@ -1,10 +1,10 @@
 package test.formatoEtiqueta;
 
-import BO.GestorFormatoEtiquetas;
-import DAO.DaoFormatoEtiqueta;
-import VO.FormatoEtiqueta;
+import muela.BO.GestorFormatoEtiqueta;
+import muela.DAO.DaoFormatoEtiqueta;
+import muela.VO.FormatoEtiqueta;
 
-public class AltaTestFormatoEtiquetas {
+public class AltaTestFormatoEtiqueta {
 
 	public static void main(String[] args) {
 
@@ -23,7 +23,7 @@ public class AltaTestFormatoEtiquetas {
 
 		System.out.println(testAlta);
 
-		GestorFormatoEtiquetas gestor = new GestorFormatoEtiquetas();
+		GestorFormatoEtiqueta gestor = new GestorFormatoEtiqueta();
 		FormatoEtiqueta entidad2 = new FormatoEtiqueta();
 
 		entidad2.setCodCliente(6);

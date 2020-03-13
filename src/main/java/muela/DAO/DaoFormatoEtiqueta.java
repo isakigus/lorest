@@ -1,4 +1,4 @@
-package DAO;
+package muela.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.TimeZone;
 import org.springframework.stereotype.Repository;
 
-import VO.FormatoEtiqueta;
+import muela.VO.FormatoEtiqueta;
 
 @Repository
 public class DaoFormatoEtiqueta {
@@ -210,7 +210,7 @@ public class DaoFormatoEtiqueta {
 			return listadoFormatoEtiqueta;
 
 		} catch (SQLException e) {
-			System.out.println("Error al mostrar listado de formatos de etiquetas");
+			System.out.println("Error al mostrar listado de formatos de etiqueta");
 			e.printStackTrace();
 			return null;
 		} finally {
